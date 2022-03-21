@@ -1,1 +1,96 @@
-<p>productos works!</p>
+<div class="card">
+  <div class="card-header d-flex align-items-center">
+    <h5>Lista de productos</h5>
+    <button type="button" class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+      Añadir
+    </button>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col" style="width: 180px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productosData">
+          <th>{{ producto.id }}</th>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.precio }}</td>
+          <td>
+            <button type="button" (click)="editarProducto(producto)" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editarProducto">
+              Editar
+            </button>
+            <button type="button" (click)="eliminarProducto(producto.id)" class="btn btn-danger" (click)="null">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productoForm.get('create')">
+          <div class="mb-2">
+            <label for="nombres">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Nombre">
+          </div>
+          <div class="mb-2">
+            <label for="apellidos">Precio</label>
+            <input type="number" class="form-control" id="precio" formControlName="precio" placeholder="Precio">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="productoForm.get('create').invalid" (click)="registrarProducto()" data-bs-dismiss="modal">Añadir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productoForm.get('edit')">
+          <div class="mb-2 d-none">
+            <label for="nombres">ID</label>
+            <input type="number" class="form-control" id="idproducto" formControlName="id" placeholder="ID">
+          </div>
+          <div class="mb-2">
+            <label for="nombres">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Nombre">
+          </div>
+          <div class="mb-2">
+            <label for="apellidos">Precio</label>
+            <input type="number" class="form-control" id="precio" formControlName="precio" placeholder="Precio">
+          </div>
+          <div class="mb-2 d-none">
+            <label for="nombres">Estado</label>
+            <input type="number" class="form-control" id="estado" formControlName="estado" placeholder="Estado">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="productoForm.get('edit').invalid" (click)="actualizarProducto()" data-bs-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

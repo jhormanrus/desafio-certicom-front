@@ -1,1 +1,69 @@
-<p>clientes works!</p>
+<div class="card">
+  <div class="card-header d-flex align-items-center">
+    <h5>Lista de clientes</h5>
+    <button type="button" class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#agregarCliente">
+      Añadir
+    </button>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombres completos</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of clientesData">
+            <th>{{ cliente.nombres }} {{ cliente.apellidos }}</th>
+            <td>{{ cliente.dni }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>{{ cliente.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="agregarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="clienteForm.get('create')">
+          <div class="mb-2">
+            <label for="nombres">Nombres</label>
+            <input type="text" class="form-control" id="nombres" formControlName="nombres" placeholder="Nombres">
+          </div>
+          <div class="mb-2">
+            <label for="apellidos">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" formControlName="apellidos" placeholder="Apellidos">
+          </div>
+          <div class="mb-2">
+            <label for="dni">DNI</label>
+            <input type="number" class="form-control" id="dni" formControlName="dni" placeholder="DNI">
+          </div>
+          <div class="mb-2">
+            <label for="telefono">Teléfono</label>
+            <input type="number" class="form-control" id="telefono" formControlName="telefono" placeholder="Teléfono">
+          </div>
+          <div class="mb-2">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="clienteForm.get('create').invalid" (click)="registrarCliente()" data-bs-dismiss="modal">Añadir</button>
+      </div>
+    </div>
+  </div>
+</div>
