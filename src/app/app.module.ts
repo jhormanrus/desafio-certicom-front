@@ -8,6 +8,7 @@ import { ClientesComponent } from './pages/clientes/clientes.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

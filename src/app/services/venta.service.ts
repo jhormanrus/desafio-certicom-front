@@ -15,8 +15,13 @@ export class VentaService {
     return this.http.get(endpoint);
   }
 
-  listarVentasPorFecha(fecha: Date): Observable<any> {
+  listarVentasPorFecha(fecha: string): Observable<any> {
     const endpoint = `${environment.apiUrl}/venta/listarPorFecha/${fecha}`;
+    return this.http.get(endpoint);
+  }
+
+  listarDetalleVenta(id: number): Observable<any> {
+    const endpoint = `${environment.apiUrl}/venta/detalle/${id}`;
     return this.http.get(endpoint);
   }
 
